@@ -16,6 +16,7 @@ Average rating, total ratings, total reviews, distinct works, most liked quote, 
 
 Sample output for get_author_data
 ---------------------------------
+![sampleOutput/Brandon-Sanderson](sampleOutput/Brandon-Sanderson.png)
 
 
 get_book_data
