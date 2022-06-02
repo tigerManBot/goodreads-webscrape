@@ -15,7 +15,7 @@ def get_author_name():
         name = input("Enter an author's name: ").title()
         return name.split()  # turn into a list
     else:
-        return [str.title() for str in sys.argv[1:]]
+        return [word.title() for word in sys.argv[1:]]
         # skips the program name and uses title instead of capitalize
         # because capitalize breakes with names like George R.R. Martin
 
