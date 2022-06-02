@@ -1,0 +1,120 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+from time import sleep
+import sys
+import re
+
+
+def get_author_name():
+    """Returns the authors name as a list (first/middle/last are all needed separately for the url
+    Can be given either by command line arguments or by terminal input if no command line argument was given."""
+    if len(sys.argv) <= 1:
+        # in case there was no command line arguments given
+        name = input("Enter an author's name: ").title()
+        return name.split()  # turn into a list
+    else:
+        return [str.title() for str in sys.argv[1:]]
+        # skips the program name and uses title instead of capitalize
+        # because capitalize breakes with names like George R.R. Martin
+
+
+def get_url(author_name):
+    """returns the url that will be opened in the browser."""
+    first_part = "https://www.goodreads.com/search?utf8=✓&q="
+    second_part = ""
+    for index, str in enumerate(author_name):
+        if index == len(author_name):
+            second_part += str
+            break
+        else:
+            second_part += str + '+'
+
+    return first_part + second_part
+
+
+def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct_works, quote):
+    """prints all author data to terminal"""
+    print(f"Author: {name}")
+    print(f"Average rating: {avg_rating}")
+    print(f"Total ratings: {total_ratings}")
+    print(f"Total reviews: {total_reviews}")
+    print(f"Distinct works: {distinct_works}")
+    print(f"Most liked quote: {quote}")
+
+
+def get_id(current_url):
+    """every author has a unique id on good reads. This number can be helpful in gathering information on
+    the author, and is found in the current url"""
+    id_regex = re.compile(r"[0-9]+")   # the only number in the url
+    match_obj = id_regex.search(current_url)
+
+    if match_obj:
+        return match_obj.group()
+    else:
+        print("\nError, could not find the author's id.")
+        exit()
+
+
+def main():
+    print()
+
+    author_name_as_lst = get_author_name()
+
+    # open a browser page that is the result of an author search on goodreads
+    browser = webdriver.Firefox()
+    browser.get(get_url(author_name_as_lst))
+    sleep(1)
+
+    # click on the link under the book that has the author's name
+    author_name_as_str = ' '.join(author_name_as_lst)
+
+    author_link = browser.find_element(By.LINK_TEXT, author_name_as_str)
+    author_link.click()
+    sleep(2)
+
+    # click the x on the sign-in pop up
+    x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
+    x_button.click()
+    sleep(1)
+
+    # get the current url in order to get the unique author id which is needed for the bio variable
+    current_url = browser.current_url
+    author_unique_id = get_id(current_url)
+
+    # get the average rating
+    avg_rating = browser.find_element(By.XPATH, './/span[@class = "average"]').text
+
+    # get the total ratings and reviews
+    totals_lst = browser.find_elements(By.XPATH, './/span[@class = "value-title"]')
+    total_ratings = totals_lst[0].text
+    total_reviews = totals_lst[1].text
+
+    # get the number of distinct works
+    distinct_works = browser.find_element(By.PARTIAL_LINK_TEXT, "distinct works").text
+
+    most_liked_quote = browser.find_element(By.XPATH, './/div[@class = "quoteText"]').text
+
+    # get the authors bio
+    # first, there may be a '...more' option to click first:
+    try:
+        more_dropdown_dots = browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/'
+                                                            'div[13]/a')
+        more_dropdown_dots.click()
+        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextauthor{author_unique_id}"]').text
+    except NoSuchElementException:
+        # otherwise, the bio element will be different
+        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextContainerauthor{author_unique_id}"]').text
+
+    sleep(1)
+    browser.quit()
+
+    display_rating_data(author_name_as_str, avg_rating, total_ratings, total_reviews, distinct_works, most_liked_quote)
+    print(f"\nBio:\n {bio}")
+
+
+if __name__ == "__main__":
+    main()
+
+    print()
