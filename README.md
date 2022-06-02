@@ -46,5 +46,6 @@ Sample output folders
 
 There are two folders for each program showing some sample output.  
 Do note that this data changes over time and might not perfectly match the current 
-goodreads data.
+goodreads data.  
+Especially for popular books and authors, this data changes daily.  
 
