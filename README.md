@@ -27,11 +27,18 @@ selenium and the Firefox browser are required (though changing the code to use c
 
 Other used modules: time, sys, and re.
 
-selenium and Firefox potential issues
--------------------------------------
+selenium potential issues
+-------------------------
 
 You need to have geckodriver.exe in the same folder as the python version you are using.
 For me, that path is: 
 C:\Users\User_name\AppData\Local\Programs\Python\Python310  
 If you switch to google chrome, then you need chromedriver.exe in that python folder.  
+
+Sample output folders
+---------------------
+
+There are two folders for each program showing some sample output.  
+Do note that this data changes over time and might not perfectly match the current 
+goodreads data.
 
