@@ -36,7 +36,7 @@ def get_url(author_name):
 
 def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct_works, quote):
     """prints all author data to terminal"""
-    print(f"Author: {name}")
+    print(f"\nAuthor: {name}")
     print(f"Average rating: {avg_rating}")
     print(f"Total ratings: {total_ratings}")
     print(f"Total reviews: {total_reviews}")
@@ -55,6 +55,23 @@ def get_id(current_url):
     else:
         print("\nError, could not find the author's id.")
         exit()
+
+
+def get_bio(author_unique_id, browser):
+    """Function that returns the author's bio.
+    The entire bio might have a '...more' option to click to the get the rest of the bio.
+    Though, this more option is not present in all author bios."""
+    # first, check fore the more option
+    try:
+        more_dropdown_dots = browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/'
+                                                            'div[13]/a')
+        more_dropdown_dots.click()
+        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextauthor{author_unique_id}"]').text
+    except NoSuchElementException:
+        # otherwise, the bio element will be different
+        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextContainerauthor{author_unique_id}"]').text
+
+    return bio
 
 
 def main():
@@ -96,15 +113,7 @@ def main():
     most_liked_quote = browser.find_element(By.XPATH, './/div[@class = "quoteText"]').text
 
     # get the authors bio
-    # first, there may be a '...more' option to click first:
-    try:
-        more_dropdown_dots = browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/'
-                                                            'div[13]/a')
-        more_dropdown_dots.click()
-        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextauthor{author_unique_id}"]').text
-    except NoSuchElementException:
-        # otherwise, the bio element will be different
-        bio = browser.find_element(By.XPATH, f'//span[@id="freeTextContainerauthor{author_unique_id}"]').text
+    bio = get_bio(author_unique_id, browser)
 
     sleep(1)
     browser.quit()
