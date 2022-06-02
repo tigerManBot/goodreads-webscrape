@@ -25,7 +25,7 @@ def get_url(author_name):
     first_part = "https://www.goodreads.com/search?utf8=✓&q="
     second_part = ""
     for index, word in enumerate(author_name):
-        if index == len(author_name):
+        if index == len(author_name) - 1:
             second_part += word
             break
         else:
@@ -78,10 +78,11 @@ def main():
     print()
 
     author_name_as_lst = get_author_name()
+    url = get_url(author_name_as_lst)
 
     # open a browser page that is the result of an author search on goodreads
     browser = webdriver.Firefox()
-    browser.get(get_url(author_name_as_lst))
+    browser.get(url)
     sleep(1)
 
     # click on the link under the book that has the author's name
