@@ -6,12 +6,18 @@ This project is a webscraper for the goodreads website. It features two programs
 2) get_book_data  
 
 
+Input
+-----
+
+The author name/book title can be entered through command line arguments.  
+If there are no command line arguments, then the program will ask for the author name/book title 
+through terminal input.
+
+
 get_author_data
 ---------------
 
-This program gathers data for an author. The user can enter the author's name through the  
-command line. If no command line arguments are present, then the program gets the author's name 
-through terminal input.  
+This program gathers data for an author.  
 The data this program gets for that author:  
 Average rating, total ratings, total reviews, distinct works, most liked quote, and bio.
 
