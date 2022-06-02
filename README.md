@@ -16,7 +16,7 @@ Average rating, total ratings, total reviews, distinct works, most liked quote, 
 
 Sample output for get_author_data
 ---------------------------------
-![](../Users/Adam Anwar/Pictures/Screenshots/Screenshot (658).png)
+![658](../Users/Adam Anwar/Pictures/Screenshots/Screenshot (658).png)
 
 
 get_book_data
