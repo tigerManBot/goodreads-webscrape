@@ -5,6 +5,7 @@ This project is a webscraper for the goodreads website. It features two programs
 1) get_author_data  
 2) get_book_data  
 
+
 get_author_data
 ---------------
 
@@ -13,10 +14,6 @@ command line. If no command line arguments are present, then the program gets th
 through terminal input.  
 The data this program gets for that author:  
 Average rating, total ratings, total reviews, distinct works, most liked quote, and bio.
-
-Sample output for get_author_data
----------------------------------
-![sampleOutput/Brandon-Sanderson](sampleOutput/Brandon-Sanderson.png)
 
 
 get_book_data
