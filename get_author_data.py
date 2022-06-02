@@ -24,12 +24,12 @@ def get_url(author_name):
     """returns the url that will be opened in the browser."""
     first_part = "https://www.goodreads.com/search?utf8=✓&q="
     second_part = ""
-    for index, str in enumerate(author_name):
+    for index, word in enumerate(author_name):
         if index == len(author_name):
-            second_part += str
+            second_part += word
             break
         else:
-            second_part += str + '+'
+            second_part += word + '+'
 
     return first_part + second_part
 
