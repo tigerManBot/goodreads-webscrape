@@ -69,7 +69,6 @@ def main():
 
     # click on the link under the book that has the author's name
     author_name_as_str = ' '.join(author_name_as_lst)
-
     author_link = browser.find_element(By.LINK_TEXT, author_name_as_str)
     author_link.click()
     sleep(2)
