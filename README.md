@@ -14,6 +14,8 @@ If there are no command line arguments, then the program will ask for the author
 through terminal input.  
 The input does not have to have the correct capitilization, but the author name must match the author 
 name in goodreads.  
+For the get_book_data program, the book title doesn't need to be exactly as it appears on goodreads,
+ but still within reason.
 
 
 get_author_data
