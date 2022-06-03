@@ -39,7 +39,6 @@ Once the user is done reading the reviews, they can press any key(via terminal p
 
 Requirements
 ------------
-
 selenium and the Firefox/Chrome are required.  
 The default browser used is Firefox.  
 To change the default browser, replace: browser = webdriver.Firefox()  
