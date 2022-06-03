@@ -34,6 +34,29 @@ def get_url(author_name):
     return first_part + second_part
 
 
+def exit_sign_in_popup(browser):
+    """Closes the sign-in pop up."""
+    x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
+    x_button.click()
+    sleep(1)
+
+
+def exit_beta_version(browser):
+    """There is a beta version of the site that sometimes pops up, this function reverts the site back to
+    the original version."""
+    try:
+        beta_button = browser.find_element(By.XPATH, '/html/body/div[1]/div[1]/main/div[5]/div/button')
+        beta_button.click()
+        sleep(1)
+        leave_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div[3]/div/button/span')
+        leave_button.click()
+        sleep(3)
+        # the sign-in pop up shows again
+        exit_sign_in_popup(browser)
+    except NoSuchElementException:
+        return()
+
+
 def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct_works, quote):
     """prints all author data to terminal"""
     print(f"\nAuthor: {name}")
@@ -92,9 +115,11 @@ def main():
     sleep(2)
 
     # click the x on the sign-in pop up
-    x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
-    x_button.click()
-    sleep(1)
+    # x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
+    # x_button.click()
+    # sleep(1)
+    exit_sign_in_popup(browser)
+    exit_beta_version(browser)
 
     # get the current url in order to get the unique author id which is needed for the bio variable
     current_url = browser.current_url
