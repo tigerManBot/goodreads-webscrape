@@ -13,12 +13,8 @@ The author name/book title can be entered through command line arguments.
 If there are no command line arguments, then the program will ask for the author name/book title 
 through terminal input.  
 
-For the get_author_data program, the author's name does not need to have correct capitalization,
- but it needs to be correctly spelled (as it appears on goodreads). 
-This is because some books have multiple authors and the program needs the correct author.
-
-For the get_book_data program, the book title doesn't need to be spelled exactly as it appears on 
-goodreads, but still within reason.
+The author name/book title does not need to be spelled perfectly.  
+The search will fail if the spelling is too far off.  
 
 
 get_author_data
