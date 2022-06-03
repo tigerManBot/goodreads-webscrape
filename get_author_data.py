@@ -55,7 +55,7 @@ def get_author_link(browser, user_inputed_author_name):
     match_counts = []
     for name in author_links_lowered:
         matches = 0
-        for j in range(min(len(user_inputed_author_name), len(name))):
+        for j in range(min(len(user_inputed_author_name), len(name))):  # if one string is smaller, don't out of range
             matches += user_inputed_author_name[j] == name[j]
 
         match_counts.append(matches)
