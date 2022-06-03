@@ -86,7 +86,6 @@ def main():
     browser.get(url)
 
     # click on the appropriate book
-    # book_link = browser.find_element(By.PARTIAL_LINK_TEXT, book_title_as_str)
     book_link = browser.find_element(By.CLASS_NAME, 'bookTitle')
     book_link.click()
     sleep(2)
@@ -109,7 +108,7 @@ def main():
     # click 'Rating details' located next to the average rating
     rating_details_option = browser.find_element(By.LINK_TEXT, "Rating details")
     rating_details_option.click()
-    sleep(1)    # see later if this can be brought down to 1
+    sleep(1)
 
     # Get the ratings distribution, % of 5 star, total 5 stars, etc.
     rating_distribution = []

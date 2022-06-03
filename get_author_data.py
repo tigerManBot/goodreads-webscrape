@@ -114,10 +114,7 @@ def main():
     author_link.click()
     sleep(2)
 
-    # click the x on the sign-in pop up
-    # x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
-    # x_button.click()
-    # sleep(1)
+    # close the sign-in pop ups and exits the beta version if the browser defaults to that version of goodreads
     exit_sign_in_popup(browser)
     exit_beta_version(browser)
 
