@@ -34,6 +34,38 @@ def get_url(author_name):
     return first_part + second_part
 
 
+def get_author_link(browser, user_inputed_author_name):
+    """Gets the correct author link to click on.
+    It compares each author link with the user inputted author_name.
+    The link with the the most matches will be the link that gets clicked.
+
+    This is necessary because some search results will have multiple authors listed.
+    Without this function, the user_inputed_author_name would have to match exactly what the
+    author's name is on goodreads. This function allows for some spelling/spacing issues in user input,
+    though the user input could still break depending on how bad their spelling is."""
+    author_links = browser.find_elements(By.XPATH, './/a[@class = "authorName"]')[:5]
+    # There are many author links on the page, so I don't want to compare them all
+    # I arbitrariliy chose to cap the links at size 5 as this seems reasonable
+
+    author_links_lowered = [name.text.lower() for name in author_links]     # lowered for string comparisons
+    user_inputed_author_name = user_inputed_author_name.lower()
+
+    # compare each name in author_links_lowered to the user_inputed_author_name
+    # getting the character match count for each name in author_links_lowered
+    match_counts = []
+    for name in author_links_lowered:
+        matches = 0
+        for j in range(min(len(user_inputed_author_name), len(name))):
+            matches += user_inputed_author_name[j] == name[j]
+
+        match_counts.append(matches)
+
+    max_index = match_counts.index((max(match_counts)))     # index with the most matches
+    print(f"Index: {max_index}")
+    print(f"Link to click: {author_links[max_index].text}")
+    return author_links[max_index]
+
+
 def exit_sign_in_popup(browser):
     """Closes the sign-in pop up."""
     x_button = browser.find_element(By.XPATH, '/html/body/div[3]/div/div/div[1]')
@@ -86,7 +118,10 @@ def get_bio(author_unique_id, browser):
     Though, this more option is not present in all author bios."""
     # first, check fore the more option
     try:
-        more_dropdown_dots = browser.find_element(By.LINK_TEXT, '...more')
+        more_dropdown_dots = browser.find_element(By.CSS_SELECTOR, 'body > div.content > div.mainContentContainer > '
+                                                                   'div.mainContent > div.mainContentFloat > d'
+                                                                   'iv.reverseColumnSizes > div.rightContainer > '
+                                                                   'div.aboutAuthorInfo > a')
         more_dropdown_dots.click()
         sleep(1)
         bio = browser.find_element(By.XPATH, f'//span[@id="freeTextauthor{author_unique_id}"]').text
@@ -110,7 +145,7 @@ def main():
 
     # click on the link under the book that has the author's name
     author_name_as_str = ' '.join(author_name_as_lst)
-    author_link = browser.find_element(By.LINK_TEXT, author_name_as_str)
+    author_link = get_author_link(browser, author_name_as_str)
     author_link.click()
     sleep(3)    # sometimes the browser can stall
 
