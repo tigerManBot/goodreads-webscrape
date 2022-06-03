@@ -11,7 +11,9 @@ Input
 
 The author name/book title can be entered through command line arguments.  
 If there are no command line arguments, then the program will ask for the author name/book title 
-through terminal input.
+through terminal input.  
+The input does not have to have the correct capitilization, but the author name must match the author 
+name in goodreads.  
 
 
 get_author_data
