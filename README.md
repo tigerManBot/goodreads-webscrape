@@ -40,7 +40,11 @@ Once the user is done reading the reviews, they can press any key(via terminal p
 Requirements
 ------------
 
-selenium and the Firefox browser are required (though changing the code to use chrome would be easy). 
+selenium and the Firefox/Chrome are required.  
+The default browser used is Firefox.  
+To change the default browser, replace: browser = webdriver.Firefox()  
+with: browser = webdriver.Chrome()  
+This line can be found near the top of def main(). 
 
 Other used modules: time, sys, and re.
 
