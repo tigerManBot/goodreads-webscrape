@@ -28,10 +28,11 @@ get_book_data
 -------------
 
 This program gathers data for a book and opens the 3 most liked reviews.  
-The data this program gets for that book: 
-Average rating, total ratings, total reviews, and the rating distribution.  
+The data this program gets for that book:  
+Average rating, total ratings, total reviews, and the rating distribution.    
 The rating distribution is the distribution of stars, shown by % of star ratings, and the number of 
-star ratings. For example: Five Stars: 42% (4415), Four Stars: 42% (4415), etc.  
+star ratings.  
+For example: Five Stars: 42% (4415), Four Stars: 42% (4415), etc.    
 After the data is displayed, the 3 most liked reviews open up in new tabs.  
 Once the user is done reading the reviews, they can press any key(via terminal prompt) to exit.
 
