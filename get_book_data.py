@@ -131,8 +131,8 @@ def main():
     display_rating_distribution(rating_distribution)
 
     # open in a new tab the top three reviews (click 'see review' at the bottom of the review)
-    top_reviews = browser.find_elements(By.LINK_TEXT, "see review")
-    for review in top_reviews[:3]:
+    top_reviews = browser.find_elements(By.LINK_TEXT, "see review")[:3]
+    for review in top_reviews:
         review.send_keys(Keys.CONTROL, Keys.ENTER)  # opens link in new tab
         sleep(1)
 
