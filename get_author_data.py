@@ -54,7 +54,7 @@ def exit_beta_version(browser):
         # the sign-in pop up shows again
         exit_sign_in_popup(browser)
     except NoSuchElementException:
-        return()
+        return
 
 
 def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct_works, quote):
@@ -86,9 +86,9 @@ def get_bio(author_unique_id, browser):
     Though, this more option is not present in all author bios."""
     # first, check fore the more option
     try:
-        more_dropdown_dots = browser.find_element(By.XPATH, '/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/'
-                                                            'div[13]/a')
+        more_dropdown_dots = browser.find_element(By.LINK_TEXT, '...more')
         more_dropdown_dots.click()
+        sleep(1)
         bio = browser.find_element(By.XPATH, f'//span[@id="freeTextauthor{author_unique_id}"]').text
     except NoSuchElementException:
         # otherwise, the bio element will be different
@@ -112,7 +112,7 @@ def main():
     author_name_as_str = ' '.join(author_name_as_lst)
     author_link = browser.find_element(By.LINK_TEXT, author_name_as_str)
     author_link.click()
-    sleep(2)
+    sleep(3)    # sometimes the browser can stall
 
     # close the sign-in pop ups and exits the beta version if the browser defaults to that version of goodreads
     exit_sign_in_popup(browser)
@@ -134,6 +134,7 @@ def main():
     distinct_works = browser.find_element(By.PARTIAL_LINK_TEXT, "distinct works").text
 
     most_liked_quote = browser.find_element(By.XPATH, './/div[@class = "quoteText"]').text
+    sleep(1)
 
     # get the authors bio
     bio = get_bio(author_unique_id, browser)
