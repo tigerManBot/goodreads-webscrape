@@ -4,7 +4,7 @@ Description
 This project is a webscraper for the goodreads website. It features two programs.    
 1) get_author_data: takes an author's name as input and delivers data about that author.
 
-2) get_book_data: takes a bokk title as input and delivers data about that book.
+2) get_book_data: takes a book title as input and delivers data about that book.
 
 
 Input
