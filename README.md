@@ -14,7 +14,7 @@ If there are no command line arguments, then the program will ask for the author
 through terminal input.  
 
 The author name/book title does not need to be spelled perfectly.  
-The search will fail if the spelling is too far off.  
+However, the search will fail if the spelling is too far off.  
 
 
 get_author_data
