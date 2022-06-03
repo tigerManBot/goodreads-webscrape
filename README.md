@@ -47,9 +47,11 @@ Other used modules: time, sys, and re.
 selenium potential issues
 -------------------------
 
-You need to have geckodriver.exe in the same folder as the python version you are using.
+if you are using Firefox(), then you need to have geckodriver.exe in the same folder as the python version you  
+are using.  
 For me, that path is: 
 C:\Users\User_name\AppData\Local\Programs\Python\Python310  
+
 If you switch to google chrome, then you need chromedriver.exe in that python folder.  
 
 Sample output folders
