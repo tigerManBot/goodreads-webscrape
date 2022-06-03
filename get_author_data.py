@@ -100,7 +100,7 @@ def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct
 def get_id(current_url):
     """every author has a unique id on good reads. This number can be helpful in gathering information on
     the author, and is found in the current url"""
-    id_regex = re.compile(r"[0-9]+")   # the only number in the url
+    id_regex = re.compile(r"\d+")   # the only number in the url
     match_obj = id_regex.search(current_url)
 
     if match_obj:
