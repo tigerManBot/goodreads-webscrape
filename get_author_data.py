@@ -61,8 +61,6 @@ def get_author_link(browser, user_inputed_author_name):
         match_counts.append(matches)
 
     max_index = match_counts.index((max(match_counts)))     # index with the most matches
-    print(f"Index: {max_index}")
-    print(f"Link to click: {author_links[max_index].text}")
     return author_links[max_index]
 
 
@@ -91,7 +89,7 @@ def exit_beta_version(browser):
 
 def display_rating_data(name, avg_rating, total_ratings, total_reviews, distinct_works, quote):
     """prints all author data to terminal"""
-    print(f"\nAuthor: {name}")
+    print(f"Author: {name}")
     print(f"Average rating: {avg_rating}")
     print(f"Total ratings: {total_ratings}")
     print(f"Total reviews: {total_reviews}")
